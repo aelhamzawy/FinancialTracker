@@ -23,9 +23,9 @@ public class Ledger {
                 case "P":
                     showPayments();
                     break;
-//                case "R":
-//                    ReportMenu.showReportMenu();
-//                    break;
+                case "R":
+                    ReportMenu.showReportMenu();
+                    break;
                 case "H":
                     running = false;
                     break;
@@ -48,7 +48,7 @@ public class Ledger {
     private static void showAllTransactions() {
         System.out.println("\n--- All Transactions ---");
         List<Transaction> transactions = FileDataManger.readTransactions();
-        printSortedTransactions(transactions);
+        printTransactions(transactions);
     }
 
     private static void showDeposits() {
@@ -62,7 +62,7 @@ public class Ledger {
             }
         }
 
-        printSortedTransactions(deposits);
+        printTransactions(deposits);
     }
 
     private static void showPayments() {
@@ -76,10 +76,10 @@ public class Ledger {
             }
         }
 
-        printSortedTransactions(payments);
+        printTransactions(payments);
     }
 
-    private static void printSortedTransactions(List<Transaction> transactions) {
+    public static void printTransactions(List<Transaction> transactions) {
         // Sorting using a simple bubble sort algorithm
         for (int i = 0; i < transactions.size(); i++) {
             for (int j = 0; j < transactions.size() - 1 - i; j++) {
