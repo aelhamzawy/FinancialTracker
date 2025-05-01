@@ -51,10 +51,12 @@ public class Main {
 
         System.out.print("Enter amount: ");
         double amount = Double.parseDouble(scanner.nextLine());
-        if (!isDeposit) amount *= -1;
+        if (!isDeposit){
+            amount *= -1;
+        }
 
-        Transaction t = new Transaction(LocalDate.now(), LocalTime.now(), description, vendor, amount);
-        FileDataManger.writeTransaction(t);
+        Transaction transaction = new Transaction(LocalDate.now(), LocalTime.now(), description, vendor, amount);
+        FileDataManger.writeTransaction(transaction);
 
         System.out.println("Transaction saved.");
     }

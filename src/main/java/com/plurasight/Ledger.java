@@ -3,15 +3,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+// THIS IS THE LEDGER CLASS TO DISPLAY ALL THE ENTRIES, DEPOSITES, PAYMENTS AND REPORTS
 public class Ledger {
-    private static final Scanner scanner = new Scanner(System.in);
+    private static Scanner InputScanner = new Scanner(System.in);
 
+    // THIS METHOD TO DISPLAY THE LEDGER MENU AND A PROMPT FOR THE USER TO SELECT AN OPTION
     public static void showLedgerMenu() {
         boolean running = true;
 
         while (running) {
             printMenu();
-            String choice = scanner.nextLine().trim().toUpperCase();
+            String choice = InputScanner.nextLine().trim().toUpperCase();
 
             switch (choice) {
                 case "A":
@@ -35,7 +37,9 @@ public class Ledger {
         }
     }
 
+    //=====================================================================================================
     private static void printMenu() {
+
         System.out.println("\n=== Ledger Menu ===");
         System.out.println("A) All Transactions");
         System.out.println("D) Deposits Only");
@@ -45,68 +49,86 @@ public class Ledger {
         System.out.print("Choose an option: ");
     }
 
+    //=====================================================================================================
+    // THIS METHOD IS TO GRAP THE TRANSACTION LIST FROM THE readTransaction METHOD IN THE FileDataManger
     private static void showAllTransactions() {
         System.out.println("\n--- All Transactions ---");
         List<Transaction> transactions = FileDataManger.readTransactions();
         printTransactions(transactions);
     }
 
+    //=====================================================================================================
+    // THIS METHOD TO SHOW ALL THE DEPOSIT IN EACH TRANSACTION
     private static void showDeposits() {
         System.out.println("\n--- Deposits ---");
+
+        // ASSIGNING THE readTransaction METHODS TO THE allTransaction VARIABLE (ARRAY)
         List<Transaction> allTransactions = FileDataManger.readTransactions();
         List<Transaction> deposits = new ArrayList<>();
 
-        for (Transaction t : allTransactions) {
-            if (t.getAmount() > 0) {
-                deposits.add(t);
+        // LOOPING OVER THE allTransaction ARRAY WHICH HAS ALL THE RETURNED ALL THE TRANSACTIONS
+        for (Transaction transaction : allTransactions) {
+            if (transaction.getAmount() > 0) {
+                deposits.add(transaction);
             }
         }
 
         printTransactions(deposits);
     }
 
+    //=====================================================================================================
+    // THIS METHOD TO DISPLAY ALL THE PAYMENT IN EACH TRANSACTION
     private static void showPayments() {
         System.out.println("\n--- Payments ---");
+
+        // ASSIGNING THE readTransaction METHODS TO THE allTransaction VARIABLE (ARRAY)
         List<Transaction> allTransactions = FileDataManger.readTransactions();
         List<Transaction> payments = new ArrayList<>();
 
-        for (Transaction t : allTransactions) {
-            if (t.getAmount() < 0) {
-                payments.add(t);
+        // LOOPING OVER THE allTransaction ARRAY WHICH HAS ALL THE RETURNED ALL THE TRANSACTION
+        for (Transaction transaction : allTransactions) {
+            if (transaction.getAmount() < 0) {
+                payments.add(transaction);
             }
         }
 
         printTransactions(payments);
     }
 
-    public static void printTransactions(List<Transaction> transactions) {
-        // Sorting using a simple bubble sort algorithm
-        for (int i = 0; i < transactions.size(); i++) {
-            for (int j = 0; j < transactions.size() - 1 - i; j++) {
-                Transaction t1 = transactions.get(j);
-                Transaction t2 = transactions.get(j + 1);
 
-                // Compare dates first, and if they are the same, compare times
-                int dateCompare = t2.getDate().compareTo(t1.getDate());
+    //=====================================================================================================
+    // THIS METHOD IS TO LOOP OVER THE ARRAY OF THE TRANSACTION TO DISPLAY THE DATA INFORMATION IN ANY OTHER METHODS
+    public static void printTransactions(List<Transaction> transactions) {
+       // LOOP OVER EACH TRANSACTION
+        for (int i = 0; i < transactions.size(); i++) {
+            // CREATING THE NESTED LOOP TO DO COMPARE WITH EACH TRANSACTION IN THE LIST
+            for (int j = 0; j < transactions.size() - 1 - i; j++) {
+                // GET A SPECIFIC TRANSACTION TO COMPARE
+                Transaction transaction1 = transactions.get(j);
+                Transaction transaction2 = transactions.get(j + 1);
+
+                // GET THE DATE AND COMPARE BETWEEN THEM
+                // IF THEY ARE THE SAME, THEN I DO COMPARE BETWEEN THE TIME
+                int dateCompare = transaction2.getDate().compareTo(transaction1.getDate());
                 if (dateCompare == 0) {
-                    // If dates are the same, compare times
-                    int timeCompare = t2.getTime().compareTo(t1.getTime());
+                    // IF DATE ARE SAME THEN COMPARE TIME
+                    int timeCompare = transaction2.getTime().compareTo(transaction1.getTime());
                     if (timeCompare > 0) {
-                        // Swap if timeCompare is greater
-                        transactions.set(j, t2);
-                        transactions.set(j + 1, t1);
+                        // SWAP BETWEEN THEM
+                        transactions.set(j, transaction2);
+                        transactions.set(j + 1, transaction1);
                     }
                 } else if (dateCompare > 0) {
-                    // Swap if dateCompare is greater
-                    transactions.set(j, t2);
-                    transactions.set(j + 1, t1);
+                    // SWAP BETWEEN THEM IF DATE IS GREATER
+                    transactions.set(j, transaction2);
+                    transactions.set(j + 1, transaction1);
                 }
             }
         }
 
-        // Print the sorted transactions
-        for (Transaction t : transactions) {
-            System.out.println(t);
+        // LOOP OVER THE SORTED TRANSACTION AND PRINTED THEM
+        for (Transaction transaction : transactions) {
+            System.out.println(transaction);
         }
     }
 }

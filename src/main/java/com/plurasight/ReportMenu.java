@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 public class ReportMenu {
 
-    private static final Scanner scanner = new Scanner(System.in);
+    private static  Scanner InputScanner = new Scanner(System.in);
 
     public static void showReportMenu() {
         boolean running = true;
@@ -21,7 +21,7 @@ public class ReportMenu {
             System.out.println("0) Back");
 
             System.out.print("Choose an option: ");
-            String choice = scanner.nextLine().trim();
+            String choice = InputScanner.nextLine().trim();
 
             switch (choice) {
                 case "1":
@@ -54,9 +54,9 @@ public class ReportMenu {
         List<Transaction> allTransactions = FileDataManger.readTransactions();
         List<Transaction> result = new ArrayList<>();
 
-        for (Transaction t : allTransactions) {
-            if (t.getDate().getMonth() == now.getMonth() && t.getDate().getYear() == now.getYear()) {
-                result.add(t);
+        for (Transaction transaction : allTransactions) {
+            if (transaction.getDate().getMonth() == now.getMonth() && transaction.getDate().getYear() == now.getYear()) {
+                result.add(transaction);
             }
         }
 
@@ -72,10 +72,10 @@ public class ReportMenu {
         List<Transaction> allTransactions = FileDataManger.readTransactions();
         List<Transaction> result = new ArrayList<>();
 
-        for (Transaction t : allTransactions) {
-            LocalDate date = t.getDate();
+        for (Transaction transaction : allTransactions) {
+            LocalDate date = transaction.getDate();
             if (!date.isBefore(startOfPreviousMonth) && !date.isAfter(endOfPreviousMonth)) {
-                result.add(t);
+                result.add(transaction);
             }
         }
 
@@ -88,15 +88,16 @@ public class ReportMenu {
         List<Transaction> allTransactions = FileDataManger.readTransactions();
         List<Transaction> result = new ArrayList<>();
 
-        for (Transaction t : allTransactions) {
-            if (t.getDate().getYear() == now.getYear()) {
-                result.add(t);
+        for (Transaction transaction : allTransactions) {
+            if (transaction.getDate().getYear() == now.getYear()) {
+                result.add(transaction);
             }
         }
 
         Ledger.printTransactions(result);
     }
 
+    // METHOD TO GET THE PREVIOUS YEAR
     private static void showPreviousYear() {
         System.out.println("\n--- Previous Year ---");
         LocalDate now = LocalDate.now();
@@ -105,26 +106,27 @@ public class ReportMenu {
         List<Transaction> allTransactions = FileDataManger.readTransactions();
         List<Transaction> result = new ArrayList<>();
 
-        for (Transaction t : allTransactions) {
-            if (t.getDate().getYear() == previousYear) {
-                result.add(t);
+        for (Transaction transaction : allTransactions) {
+            if (transaction.getDate().getYear() == previousYear) {
+                result.add(transaction);
             }
         }
 
         Ledger.printTransactions(result);
     }
 
+    // METHOD TO GET THE TRANSACTION BY THE VENDOR NAME
     private static void searchByVendor() {
         System.out.print("Enter Vendor Name: ");
-        String vendor = scanner.nextLine().trim();
+        String vendor = InputScanner.nextLine().trim();
         System.out.println("\n--- Transactions for Vendor: " + vendor + " ---");
 
         List<Transaction> allTransactions = FileDataManger.readTransactions();
         List<Transaction> result = new ArrayList<>();
 
-        for (Transaction t : allTransactions) {
-            if (t.getVendor().equalsIgnoreCase(vendor)) {
-                result.add(t);
+        for (Transaction transaction : allTransactions) {
+            if (transaction.getVendor().equalsIgnoreCase(vendor)) {
+                result.add(transaction);
             }
         }
 
