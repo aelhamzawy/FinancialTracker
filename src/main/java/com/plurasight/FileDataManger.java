@@ -36,6 +36,7 @@ public class FileDataManger {
 
                     // CREATING A NEW OBJECT OF THE TRANSACTION CLASS
                     // AND ASSIGNING EACH PART OF THE LINE WITH A SPECIFIC DATA
+                    // 2025-04-29|22:50:22.386611700|this is a deposite for my salary|ahmed elhamzawy|2000.0
                     Transaction transaction = new Transaction(
                             LocalDate.parse(lineDataParts[0]),
                             LocalTime.parse(lineDataParts[1]),

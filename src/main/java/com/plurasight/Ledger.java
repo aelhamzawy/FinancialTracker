@@ -16,7 +16,7 @@ public class Ledger {
             String choice = InputScanner.nextLine().trim().toUpperCase();
 
             switch (choice) {
-                case "A":
+                case "A":  // A) All Transactions
                     showAllTransactions();
                     break;
                 case "D":
