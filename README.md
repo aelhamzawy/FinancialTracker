@@ -64,11 +64,11 @@ Transactions are stored in `transactions.csv` using this format:
 ---
 
 ## Screenshots
-<img src="./assets/screenshots/img1.png" alt="My Project Screenshot" width="400"/>
-<img src="./assets/screenshots/img2.png" alt="My Project Screenshot" width="400"/>
-<img src="./assets/screenshots/img3.png" alt="My Project Screenshot" width="400"/>
-<img src="./assets/screenshots/img4.png" alt="My Project Screenshot" width="400"/>
-<img src="./assets/screenshots/img5.png" alt="My Project Screenshot" width="400"/>
+![Financial Tracker Code screenshot](images/screenshots/img1.png)
+![Financial Tracker Code screenshot](images/screenshots/img2.png)
+![Financial Tracker Code screenshot](images/screenshots/img3.png)
+![Financial Tracker Code screenshot](images/screenshots/img4.png)
+![Financial Tracker Code screenshot](images/screenshots/img5.png)
 
 ---
 
