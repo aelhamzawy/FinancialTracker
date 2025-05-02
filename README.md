@@ -64,7 +64,7 @@ Transactions are stored in `transactions.csv` using this format:
 ---
 
 ## Screenshots
-![Financial Tracker Code screenshot](assets/screenshots/img1.png)
+![Financial Tracker Code screenshot](./assets/screenshots/img1.png)
 ![Financial Tracker Code screenshot](assets/screenshots/img2.png)
 ![Financial Tracker Code screenshot](assets/screenshots/img3.png)
 ![Financial Tracker Code screenshot](assets/screenshots/img4.png)
